@@ -8,8 +8,8 @@ export async function onRequestPost({ request, env }) {
     await env.INTAKES.put(id, JSON.stringify({ id, ts, payload }));
 
     // 2) Email it to you (Option A)
-    const toEmail = env.TO_EMAIL || "intake@continuitysystems.com"; // you can override with env var
-    const fromEmail = env.FROM_EMAIL || "intake@continuitysystems.com"; // must be on your domain
+    const toEmail = env.TO_EMAIL || "intake@continuitysystems.org"; // you can override with env var
+    const fromEmail = env.FROM_EMAIL || "intake@continuitysystems.org"; // must be on your domain
 
     const subject = `Risk Clarity Intake — ${id}`;
     const textBody = formatIntakeEmail({ id, ts, payload });
@@ -19,7 +19,7 @@ export async function onRequestPost({ request, env }) {
       headers: { "content-type": "application/json" },
       body: JSON.stringify({
         personalizations: [
-          { to: [{ email: toEmail }], dkim_domain: "continuitysystems.com" }
+          { to: [{ email: toEmail }], dkim_domain: "continuitysystems.org" }
         ],
         from: { email: fromEmail, name: "Continuity Systems Intake" },
         subject,
